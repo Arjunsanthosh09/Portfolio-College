@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publications | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            color: #222;
+            background: #f8f9fa;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header and Navigation */
+        header {
+            padding: 20px 0;
+            position: relative;
+            z-index: 100;
+            background: #f8f9fa;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #222;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #6d28d9;
+        }
+
+        .nav-links a.active::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -6px;
+            width: 6px;
+            height: 6px;
+            background: #6d28d9;
+            border-radius: 50%;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 12px;
+            background: #f8f8f8;
+            color: #111;
+            text-decoration: none;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background: #e0e0e0;
+            transform: translateY(-2px);
+        }
+
+        /* Publications Section */
+        .publications-section {
+            padding: 60px 0 100px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        /* Publications Grid */
+        .publications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 90px;
+            max-width: 1900px;
+            margin: 0 auto;
+        }
+
+        /* Publication Card */
+        .publication-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .publication-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Publication Image - Updated for 16:9 aspect ratio */
+        .publication-image {
+            position: relative;
+            height: 700px;
+            padding-bottom: 56.25%;
+            /* 16:9 aspect ratio (9/16 = 0.5625) */
+            overflow: hidden;
+            background: #f1f1f1;
+        }
+
+        .publication-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .publication-card:hover .publication-image img {
+            transform: scale(1.05);
+        }
+
+        .publication-date {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #333;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+
+        /* Publication Content */
+        .publication-content {
+            padding: 30px;
+        }
+
+        .publication-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .publication-description {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .publication-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 25px;
+        }
+
+        .publication-author {
+            font-size: 0.9rem;
+            color: #444;
+        }
+
+        .publication-author strong {
+            color: #6d28d9;
+            font-weight: 600;
+        }
+
+        .publication-journal {
+            font-size: 0.85rem;
+            color: #777;
+            font-style: italic;
+        }
+
+        .publication-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .read-more-btn {
+            flex: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: #6d28d9;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .read-more-btn:hover {
+            background: #5b21b6;
+            transform: translateY(-2px);
+        }
+
+        .download-paper-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 16px;
+            background: #f8f9fa;
+            color: #333;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 2px solid #e9ecef;
+        }
+
+        .download-paper-btn:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+            border-color: #6d28d9;
+            color: #6d28d9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .publications-grid {
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                gap: 30px;
+            }
+
+            .nav-links {
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .publications-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .section-title h1 {
+                font-size: 2.2rem;
+            }
+
+            .publication-content {
+                padding: 25px;
+            }
+
+            .publication-actions {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-links {
+                gap: 15px;
+                font-size: 0.9rem;
+            }
+
+            .section-title h1 {
+                font-size: 1.8rem;
+            }
+
+            .publication-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <div class="logo">
+                    <h2><span><img src="../images/logo/arjun.png" alt="Logo" width="100px"></span></h2>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="pages/about.html">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#works">Works</a></li>
+                    <li><a href="#achievements">Achievements</a></li>
+                    <li><a href="#publication" class="active">Publication</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <a href="cv.pdf" download class="download-btn">
+                    Download CV <i class="fa-solid fa-file"></i>
+                </a>
+            </nav>
+        </header>
+
+        <section class="publications-section">
+            <div class="section-title">
+                <h1>Research Publications</h1>
+                <p>My contributions to academic research and technology advancement</p>
+            </div>
+
+            <div class="publications-grid">
+                <div class="publication-card">
+                    <div class="publication-image">
+                        <img src="../images/research paper/flutter.png" alt="Cross-Platform Innovation Research">
+                        <div class="publication-date">12, DEC 2024</div>
+                    </div>
+                    <div class="publication-content">
+                        <h3 class="publication-title">Cross-Platform Innovation: The Rise and Impact of Flutter in
+                            Modern App Development</h3>
+                        <p class="publication-description">
+                            This paper examines Google's Flutter as a cost-effective, single codebase solution for
+                            developing apps across iOS, Android, and desktop. Drawing on real developer experiences, it
+                            explores Flutter's strengths, weaknesses, and impact on project collaboration, highlighting
+                            features like Hot Reload and challenges with Dart.
+                        </p>
+                        <div class="publication-meta">
+                            <div class="publication-author">
+                                <strong>Arjun Santhosh</strong> (First Author) ,Co-Authors ( Anu Tiji , Anuraj T R ,
+                                Naithan Thomas , Aswathy Anoop )
+
+                            </div>
+                            <div class="publication-journal">
+                                International Research Journal on Advanced Engineering and Management (IRJAEM)
+                                2(12):3560-3569
+                            </div>
+                        </div>
+                        <div class="publication-actions">
+                            <a href="https://www.researchgate.net/publication/387018839_Cross-Platform_Innovation_The_Rise_and_Impact_of_Flutter_in_Modern_App_Development"
+                                class="read-more-btn">
+                                Read More <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <a href="https://www.researchgate.net/publication/387018839_Cross-Platform_Innovation_The_Rise_and_Impact_of_Flutter_in_Modern_App_Development"
+                                class="download-paper-btn">
+                                <i class="fas fa-download"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="publication-card">
+                    <div class="publication-image">
+                        <img src="../images/research paper/cloud computing.png" alt="Cloud Computing Research">
+                        <div class="publication-date">12, DEC 2024</div>
+                    </div>
+                    <div class="publication-content">
+                        <h3 class="publication-title">The Role of Cloud Computing in Scaling Startups: Balancing
+                            Technology and Business Growth</h3>
+                        <p class="publication-description">
+                            This paper examines how startups can leverage cloud computing effectively by balancing its
+                            benefits and challenges. Through analysis of both successful and unsuccessful cases,
+                            including Zoom, Slack, and Dropbox—it explores cost structures, security concerns, and
+                            organizational impacts.
+                        </p>
+                        <div class="publication-meta">
+                            <div class="publication-author">
+                                <strong>Arjun Santhosh</strong> (First Author) ,Co-Authors ( Anu Tiji , Devika B Menon ,
+                                Haripriya S , Naithan Thomas )
+                            </div>
+                            <div class="publication-journal">
+                                International Research Journal on Advanced Engineering and Management (IRJAEM)
+                                2(12):3656-3664
+                            </div>
+                        </div>
+                        <div class="publication-actions">
+                            <a href="https://www.researchgate.net/publication/387065928_The_Role_of_Cloud_Computing_in_Scaling_Startups_Balancing_Technology_and_Business_Growth"
+                                class="read-more-btn">
+                                Read More <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <a href="https://www.researchgate.net/publication/387065928_The_Role_of_Cloud_Computing_in_Scaling_Startups_Balancing_Technology_and_Business_Growth"
+                                class="download-paper-btn">
+                                <i class="fas fa-download"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="publication-card">
+                    <div class="publication-image">
+                        <img src="../images/research paper/saas.png" alt="AI Impact on Job Automation">
+                        <div class="publication-date">12, DEC 2024</div>
+                    </div>
+                    <div class="publication-content">
+                        <h3 class="publication-title">SaaS (Software as a Service) and its Impact on Business
+                            Scalability</h3>
+                        <p class="publication-description">
+                            This paper examines SaaS as a flexible cloud-based solution for delivering software to
+                            businesses of all sizes. Drawing on real-world applications, it explores SaaS’s strengths,
+                            weaknesses, and impact on scalability, highlighting benefits like cost reduction and
+                            challenges with data security.
+                        </p>
+                        <div class="publication-meta">
+                            <div class="publication-author">
+                                <strong>Arjun Santhosh</strong> (First Author) , Co-Authos ( Drisya Unnikrishnan ,
+                                Sillamol Shibu,
+                                Mina Fathima , Gayathri Lekshmi )
+                            </div>
+                            <div class="publication-journal">
+                                International Research Journal on Advanced Engineering and Management (IRJAEM)
+                                2(12):3575-3584
+                            </div>
+                        </div>
+                        <div class="publication-actions">
+                            <a href="https://www.researchgate.net/publication/387012450_SaaS_Software_as_a_Service_and_its_Impact_on_Business_Scalability"
+                                class="read-more-btn">
+                                Read More <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <a href="https://www.researchgate.net/publication/387012450_SaaS_Software_as_a_Service_and_its_Impact_on_Business_Scalability"
+                                class="download-paper-btn">
+                                <i class="fas fa-download"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="publication-card">
+                    <div class="publication-image">
+                        <img src="../images/research paper/stratergic.png" alt="Machine Learning Research">
+                        <div class="publication-date">12, DEC 2024</div>
+                    </div>
+                    <div class="publication-content">
+                        <h3 class="publication-title">Machine Learning Applications in Healthcare: Predictive Analytics
+                            and Patient Outcomes</h3>
+                        <p class="publication-description">
+                            This paper examines strategic entrepreneurship as the integration of innovation and
+                            strategic management to drive growth in competitive markets. Drawing on emerging
+                            technologies, it explores strengths, weaknesses, and implications for entrepreneurship,
+                            highlighting opportunities from AI, IoT, and blockchain alongside challenges in
+                            cybersecurity and legal constraints.
+                        </p>
+                        <div class="publication-meta">
+                            <div class="publication-author">
+                                <strong>Arjun Santhosh</strong> (First Author) , Co-Authos ( Drisya Unnikrishnan ,
+                                Sillamol Shibu,
+                                Ananthapadmanabhan M ,K M Meenakshi )
+                            </div>
+                            <div class="publication-journal">
+                                International Research Journal on Advanced Engineering and Management (IRJAEM)
+                                2(12):3531-3539
+                            </div>
+                        </div>
+                        <div class="publication-actions">
+                            <a href="https://goldncloudpublications.com/index.php/irjaem/article/view/611"
+                                class="read-more-btn">
+                                Read More <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <a href="https://goldncloudpublications.com/index.php/irjaem/article/view/611"
+                                class="download-paper-btn">
+                                <i class="fas fa-download"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="publication-card">
+                    <div class="publication-image">
+                        <img src="../images/research paper/ai impact.png" alt="Cybersecurity Research">
+                        <div class="publication-date">01, Jan 2023</div>
+                    </div>
+                    <div class="publication-content">
+                        <h3 class="publication-title">AI IMPACT ON JOB AUTOMATION</h3>
+                        <p class="publication-description">
+                            This paper examines AI as a transformative force reshaping industries through automation of
+                            human tasks. Drawing on sectoral impacts, it explores AI’s strengths, weaknesses, and
+                            implications for employment, highlighting productivity gains and safer work conditions
+                            alongside challenges of labor displacement and workforce reskilling.
+                        </p>
+                        <div class="publication-meta">
+                            <div class="publication-author">
+                                <strong>Arjun Santhosh</strong> (First Author), Co-Authos ( Drisya Unnikrishnan,
+                                Sillamol Shibu, K. M. Meenakshi )
+                            </div>
+                            <div class="publication-journal">
+                                International Journal of Engineering Technology and Management Sciences
+                                2023, Volume 7 Issue 4
+                            </div>
+                        </div>
+                        <div class="publication-actions">
+                            <a href="https://ijetms.in/Vol-7-issue-4/Vol-7-Issue-4-55.html" class="read-more-btn">
+                                Read More <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <a href="https://ijetms.in/Vol-7-issue-4/Vol-7-Issue-4-55.html" class="download-paper-btn">
+                                <i class="fas fa-download"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>
