@@ -16,18 +16,27 @@
                 <div class="logo">
                     <h2><span><img src="../images/logo/arjun.png" alt="Logo" width="100px"></span></h2>
                 </div>
-                <ul class="nav-links">
-                  <li><a href="../index.html" class="active">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="skills.html">Skills</a></li>
-                    <li><a href="works.html">Works</a></li>
-                    <li><a href="publications.html">Publication</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="contatus.html">Contact</a></li>
-                </ul>
-                <a href="resume/cv.pdf" download class="download-btn">
-                    Download Resume<i class="fa-solid fa-file"></i>
-                </a>
+                
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <div class="nav-menu">
+                    <ul class="nav-links">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="skills.html">Skills</a></li>
+                        <li><a href="works.html">Works</a></li>
+                        <li><a href="publications.html" class="active">Publication</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contatus.html">Contact</a></li>
+                    </ul>
+                    <a href="../resume/cv.pdf" download class="download-btn">
+                        Download Resume<i class="fa-solid fa-file"></i>
+                    </a>
+                </div>
             </nav>
         </header>
 
@@ -123,7 +132,7 @@
                             Scalability</h3>
                         <p class="publication-description">
                             This paper examines SaaS as a flexible cloud-based solution for delivering software to
-                            businesses of all sizes. Drawing on real-world applications, it explores SaaS’s strengths,
+                            businesses of all sizes. Drawing on real-world applications, it explores SaaS's strengths,
                             weaknesses, and impact on scalability, highlighting benefits like cost reduction and
                             challenges with data security.
                         </p>
@@ -198,7 +207,7 @@
                         <h3 class="publication-title">AI IMPACT ON JOB AUTOMATION</h3>
                         <p class="publication-description">
                             This paper examines AI as a transformative force reshaping industries through automation of
-                            human tasks. Drawing on sectoral impacts, it explores AI’s strengths, weaknesses, and
+                            human tasks. Drawing on sectoral impacts, it explores AI's strengths, weaknesses, and
                             implications for employment, highlighting productivity gains and safer work conditions
                             alongside challenges of labor displacement and workforce reskilling.
                         </p>
@@ -275,6 +284,48 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        const body = document.body;
+
+        mobileMenuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            mobileMenuToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            body.classList.toggle('menu-open');
+        });
+
+        // Close menu when clicking on a link
+        const navLinks = document.querySelectorAll('.nav-links a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+                body.classList.remove('menu-open');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-menu') && !e.target.closest('.mobile-menu-toggle')) {
+                mobileMenuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+                body.classList.remove('menu-open');
+            }
+        });
+
+        // Close menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                mobileMenuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+                body.classList.remove('menu-open');
+            }
+        });
+    </script>
 </body>
 
 </html>

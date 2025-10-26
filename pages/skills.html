@@ -16,18 +16,27 @@
                 <div class="logo">
                     <h2><span><img src="../images/logo/arjun.png" alt="Logo" width="100px"></span></h2>
                 </div>
-                <ul class="nav-links">
-                  <li><a href="../index.html" class="active">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="skills.html">Skills</a></li>
-                    <li><a href="works.html">Works</a></li>
-                    <li><a href="publications.html">Publication</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="contatus.html">Contact</a></li>
-                </ul>
-               <a href="resume/cv.pdf" download class="download-btn">
-                    Download Resume<i class="fa-solid fa-file"></i>
-                </a>
+                
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <div class="nav-menu">
+                    <ul class="nav-links">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="skills.html" class="active">Skills</a></li>
+                        <li><a href="works.html">Works</a></li>
+                        <li><a href="publications.html">Publication</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contatus.html">Contact</a></li>
+                    </ul>
+                    <a href="../resume/cv.pdf" download class="download-btn">
+                        Download Resume<i class="fa-solid fa-file"></i>
+                    </a>
+                </div>
             </nav>
         </header>
 
@@ -322,32 +331,45 @@
     </footer>
 
     <script>
-        
-        window.addEventListener('load', () => {
-            const progressBars = document.querySelectorAll('.progress-fill');
-            progressBars.forEach((bar, index) => {
-                setTimeout(() => {
-                    bar.style.animationDelay = `${index * 0.2}s`;
-                }, 500);
+        // Mobile menu toggle
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        const body = document.body;
+
+        mobileMenuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            mobileMenuToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            body.classList.toggle('menu-open');
+        });
+
+        // Close menu when clicking on a link
+        const navLinks = document.querySelectorAll('.nav-links a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+                body.classList.remove('menu-open');
             });
         });
 
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const progressBars = entry.target.querySelectorAll('.progress-fill');
-                    progressBars.forEach((bar, index) => {
-                        setTimeout(() => {
-                            bar.style.animation = 'none';
-                            bar.style.animation = `fillBar 2s ease-in-out forwards`;
-                        }, index * 100);
-                    });
-                }
-            });
-        }, { threshold: 0.3 });
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-menu') && !e.target.closest('.mobile-menu-toggle')) {
+                mobileMenuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+                body.classList.remove('menu-open');
+            }
+        });
 
-        observer.observe(document.querySelector('.skills-section'));
+        // Close menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                mobileMenuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+                body.classList.remove('menu-open');
+            }
+        });
     </script>
 </body>
 
