@@ -19,7 +19,6 @@ body {
   position: relative;
 }
 
-/* Fix for menu-open state */
 body.menu-open {
   overflow: hidden;
 }
@@ -31,11 +30,10 @@ body.menu-open {
   position: relative;
 }
 
-/* HEADER & NAVBAR STYLES - FIXED Z-INDEX */
 header {
   padding: 20px 0;
   position: relative;
-  z-index: 1100; /* High z-index to stay above content */
+  z-index: 1100;
   background: transparent;
 }
 
@@ -46,7 +44,6 @@ nav {
   position: relative;
 }
 
-/* Mobile Menu Toggle Button */
 .mobile-menu-toggle {
   display: none;
   flex-direction: column;
@@ -55,7 +52,7 @@ nav {
   border: none;
   cursor: pointer;
   padding: 5px;
-  z-index: 1200; /* Highest z-index */
+  z-index: 1200;
   position: relative;
 }
 
@@ -136,11 +133,10 @@ nav {
   transform: translateY(-2px);
 }
 
-/* MAIN CONTENT - LOWER Z-INDEX */
 .publications-section {
   padding: 60px 0 100px;
   position: relative;
-  z-index: 1; /* Lower than header */
+  z-index: 1;
 }
 
 .section-title {
@@ -311,10 +307,6 @@ nav {
   color: #6d28d9;
 }
 
-/* =============================================== */
-/* RESPONSIVE STYLES - FIXED MOBILE MENU */
-/* =============================================== */
-
 @media (max-width: 1024px) {
   .publications-grid {
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -327,12 +319,10 @@ nav {
 }
 
 @media (max-width: 768px) {
-  /* Show mobile menu toggle */
   .mobile-menu-toggle {
     display: flex;
   }
 
-  /* Hide nav menu by default on mobile */
   .nav-menu {
     position: fixed;
     top: 0;
@@ -346,7 +336,7 @@ nav {
     padding: 80px 30px 30px;
     box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
     transition: right 0.4s ease;
-    z-index: 1150; /* High z-index for mobile menu */
+    z-index: 1150;
     overflow-y: auto;
   }
 
@@ -405,7 +395,6 @@ nav {
     padding-top: 40px;
   }
 
-  /* Overlay when menu is open */
   .nav-overlay {
     display: none;
     position: fixed;
@@ -414,7 +403,7 @@ nav {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
-    z-index: 1149; /* Just below mobile menu */
+    z-index: 1149;
   }
 
   body.menu-open .nav-overlay {
@@ -445,7 +434,6 @@ nav {
   }
 }
 
-/* FOOTER STYLES */
 footer {
   background: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(40px) saturate(180%);

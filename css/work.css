@@ -470,10 +470,6 @@ footer::before {
   font-weight: 400;
 }
 
-/* =============================================== */
-/* RESPONSIVE NAVBAR STYLES */
-/* =============================================== */
-
 @media (max-width: 992px) {
   .projects-grid {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -489,12 +485,10 @@ footer::before {
 }
 
 @media (max-width: 768px) {
-  /* Show mobile menu toggle */
   .mobile-menu-toggle {
     display: flex;
   }
 
-  /* Hide nav menu by default on mobile */
   .nav-menu {
     position: fixed;
     top: 0;

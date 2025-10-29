@@ -48,7 +48,6 @@
             position: relative;
         }
 
-        /* Mobile Menu Toggle Button */
         .mobile-menu-toggle {
             display: none;
             flex-direction: column;
@@ -216,24 +215,220 @@
             transform: translateY(-2px);
         }
 
-        .imagecircle {
+        .frame-container {
+            position: relative;
             width: 350px;
             height: 350px;
-            border-radius: 50%;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(109, 40, 217, 0.2);
-            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .imagecircle img {
+        .floating-frame {
+            width: 300px;
+            height: 300px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 
+                0 15px 35px rgba(109, 40, 217, 0.2),
+                0 5px 15px rgba(0, 0, 0, 0.1);
+            animation: float 6s ease-in-out infinite;
+            border: 8px solid white;
+        }
+
+        .floating-frame::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, #6d28d9, #8b5cf6, #a78bfa, #6d28d9);
+            background-size: 400% 400%;
+            border-radius: 25px;
+            z-index: -1;
+            animation: gradientShift 8s ease infinite;
+        }
+
+        .floating-frame img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            border-radius: 12px;
         }
 
-        /* =============================================== */
-        /* RESPONSIVE STYLES */
-        /* =============================================== */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .geometric-frame {
+            width: 320px;
+            height: 320px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .geometric-frame::before,
+        .geometric-frame::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 4px solid transparent;
+            border-radius: 20px;
+            animation: rotate 20s linear infinite;
+        }
+
+        .geometric-frame::before {
+            border-top-color: #6d28d9;
+            border-right-color: #6d28d9;
+            animation-direction: normal;
+        }
+
+        .geometric-frame::after {
+            border-bottom-color: #8b5cf6;
+            border-left-color: #8b5cf6;
+            animation-direction: reverse;
+        }
+
+        .geometric-frame img {
+            width: 280px;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 15px;
+            z-index: 1;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .minimalist-frame {
+            width: 320px;
+            height: 320px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .minimalist-frame:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(109, 40, 217, 0.3);
+        }
+
+        .minimalist-frame::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(109, 40, 217, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .minimalist-frame:hover::before {
+            opacity: 1;
+        }
+
+        .minimalist-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .minimalist-frame:hover img {
+            transform: scale(1.1);
+        }
+
+        .glitch-frame {
+            width: 320px;
+            height: 320px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .glitch-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        .glitch-frame::before,
+        .glitch-frame::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            mix-blend-mode: multiply;
+            opacity: 0;
+            animation: glitch 5s infinite;
+        }
+
+        .glitch-frame::before {
+            background: rgba(255, 0, 0, 0.3);
+            animation-delay: 2s;
+        }
+
+        .glitch-frame::after {
+            background: rgba(0, 0, 255, 0.3);
+            animation-delay: 3s;
+        }
+
+        @keyframes glitch {
+            0%, 100% { opacity: 0; transform: translateX(0); }
+            5% { opacity: 0.3; transform: translateX(-5px); }
+            10% { opacity: 0; transform: translateX(5px); }
+            15% { opacity: 0.3; transform: translateX(-5px); }
+            20% { opacity: 0; transform: translateX(0); }
+        }
+
+        .frame-selector {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .frame-btn {
+            padding: 8px 15px;
+            background: #f8f8f8;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .frame-btn.active {
+            background: #6d28d9;
+            color: white;
+        }
+
 
         @media (max-width: 1024px) {
             .nav-links {
@@ -244,19 +439,30 @@
                 gap: 50px;
             }
 
-            .imagecircle {
+            .frame-container {
                 width: 300px;
                 height: 300px;
+            }
+            
+            .floating-frame,
+            .geometric-frame,
+            .minimalist-frame,
+            .glitch-frame {
+                width: 280px;
+                height: 280px;
+            }
+            
+            .geometric-frame img {
+                width: 250px;
+                height: 250px;
             }
         }
 
         @media (max-width: 768px) {
-            /* Show mobile menu toggle */
             .mobile-menu-toggle {
                 display: flex;
             }
 
-            /* Hide nav menu by default on mobile */
             .nav-menu {
                 position: fixed;
                 top: 0;
@@ -323,9 +529,22 @@
                 flex-wrap: wrap;
             }
 
-            .imagecircle {
+            .frame-container {
                 width: 250px;
                 height: 250px;
+            }
+            
+            .floating-frame,
+            .geometric-frame,
+            .minimalist-frame,
+            .glitch-frame {
+                width: 230px;
+                height: 230px;
+            }
+            
+            .geometric-frame img {
+                width: 200px;
+                height: 200px;
             }
 
             #home {
@@ -333,7 +552,6 @@
                 min-height: auto;
             }
 
-            /* Add overlay when menu is open */
             body::after {
                 content: '';
                 position: fixed;
@@ -387,9 +605,22 @@
                 justify-content: center;
             }
 
-            .imagecircle {
+            .frame-container {
                 width: 200px;
                 height: 200px;
+            }
+            
+            .floating-frame,
+            .geometric-frame,
+            .minimalist-frame,
+            .glitch-frame {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .geometric-frame img {
+                width: 150px;
+                height: 150px;
             }
         }
     </style>
@@ -447,9 +678,31 @@
                                 class="fa-solid fa-envelope"></i></a>
                     </div>
                 </div>
-                <div class="imagecircle">
-                    <img src="images/logo/IMG_0690.JPG" alt="Arjun's Profile Picture">
+                
+                <div class="frame-container">
+                    <div class="floating-frame active-frame">
+                        <img src="images/logo/IMG_0004.JPG" alt="Arjun's Profile Picture">
+                    </div>
+                    
+                    <div class="geometric-frame" style="display: none;">
+                        <img src="images/logo/IMG_0004.JPG" alt="Arjun's Profile Picture">
+                    </div>
+                    
+                    <div class="minimalist-frame" style="display: none;">
+                        <img src="images/logo/IMG_0004.JPG" alt="Arjun's Profile Picture">
+                    </div>
+                    
+                    <div class="glitch-frame" style="display: none;">
+                        <img src="images/logo/IMG_0004.JPG" alt="Arjun's Profile Picture">
+                    </div>
                 </div>
+            </div>
+            
+            <div class="frame-selector">
+                <button class="frame-btn active" data-frame="floating">Floating</button>
+                <button class="frame-btn" data-frame="geometric">Geometric</button>
+                <button class="frame-btn" data-frame="minimalist">Minimalist</button>
+                <button class="frame-btn" data-frame="glitch">Glitch</button>
             </div>
         </div>
     </section>
@@ -487,6 +740,23 @@
                 navMenu.classList.remove('active');
                 body.classList.remove('menu-open');
             }
+        });
+
+        const frameButtons = document.querySelectorAll('.frame-btn');
+        const frames = document.querySelectorAll('.frame-container > div');
+        
+        frameButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                frameButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                frames.forEach(frame => {
+                    frame.style.display = 'none';
+                });
+                
+                const frameType = button.getAttribute('data-frame');
+                const selectedFrame = document.querySelector(`.${frameType}-frame`);
+                selectedFrame.style.display = 'flex';
+            });
         });
     </script>
 </body>

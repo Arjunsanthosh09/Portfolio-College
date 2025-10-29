@@ -47,7 +47,7 @@
                 <div class="hero-image">
                     <div class="profile-container">
                         <div class="profile-image">
-                            <img src="../images/logo/IMG_0690.JPG" alt="Arjun Santhosh">
+                            <img src="../images/logo/IMG_0004.JPG" alt="Arjun Santhosh">
                         </div>
                     </div>
                 </div>
@@ -256,23 +256,26 @@
                     <div class="nav-dot" onclick="showGoal(4)"></div>
                 </div>
             </section>
-            
+
         </div>
     </div>
-   
+
     <footer>
         <div class="container">
             <div class="footer-container">
                 <div class="footer-col">
                     <h3>Arjun Santhosh</h3>
-                    <p>A passionate Flutter and full-stack web developer specializing in building scalable applications with modern technologies.</p>
+                    <p>A passionate Flutter and full-stack web developer specializing in building scalable applications
+                        with modern technologies.</p>
                     <div class="social-links">
-                        <a href="https://www.linkedin.com/in/arjun-santhosh-a9a731252/"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.linkedin.com/in/arjun-santhosh-a9a731252/"><i
+                                class="fab fa-linkedin-in"></i></a>
                         <a href="https://github.com/Arjunsanthosh09"><i class="fab fa-github"></i></a>
-                        <a href="https://www.instagram.com/arjun._santhosh._/?hl=en"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.instagram.com/arjun._santhosh._/?hl=en"><i
+                                class="fab fa-instagram"></i></a>
                     </div>
                 </div>
-                
+
                 <div class="footer-col">
                     <h3>Quick Links</h3>
                     <ul class="footer-links">
@@ -283,7 +286,7 @@
                         <li><a href="publications.html">Publications</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-col">
                     <h3>Services</h3>
                     <ul class="footer-links">
@@ -293,7 +296,7 @@
                         <li><a href="#">App Consultation</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-col">
                     <h3>Contact Info</h3>
                     <ul class="footer-links">
@@ -303,76 +306,66 @@
                     </ul>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
                 <p>&copy; 2024 Arjun Santhosh. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
 
-   <script>
-    // Mobile menu toggle
-    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-    const navMenu = document.querySelector('.nav-menu');
-    const body = document.body;
+    <script>
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        const body = document.body;
 
-    mobileMenuToggle.addEventListener('click', (e) => {
-        e.stopPropagation();
-        mobileMenuToggle.classList.toggle('active');
-        navMenu.classList.toggle('active');
-        body.classList.toggle('menu-open');
-    });
-
-    // Close menu when clicking on a link
-    const navLinks = document.querySelectorAll('.nav-links a');
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            mobileMenuToggle.classList.remove('active');
-            navMenu.classList.remove('active');
-            body.classList.remove('menu-open');
+        mobileMenuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            mobileMenuToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            body.classList.toggle('menu-open');
         });
-    });
 
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.nav-menu') && !e.target.closest('.mobile-menu-toggle')) {
-            mobileMenuToggle.classList.remove('active');
-            navMenu.classList.remove('active');
-            body.classList.remove('menu-open');
+        const navLinks = document.querySelectorAll('.nav-links a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+                body.classList.remove('menu-open');
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-menu') && !e.target.closest('.mobile-menu-toggle')) {
+                mobileMenuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+                body.classList.remove('menu-open');
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                mobileMenuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+                body.classList.remove('menu-open');
+            }
+        });
+        function showGoal(goalNumber) {
+            document.querySelectorAll('.goal-item').forEach(goal => {
+                goal.style.display = 'none';
+            });
+
+            document.getElementById(`goal-${goalNumber}`).style.display = 'block';
+
+            document.querySelectorAll('.nav-dot').forEach(dot => {
+                dot.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-dot')[goalNumber - 1].classList.add('active');
         }
-    });
 
-    // Close menu on escape key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            mobileMenuToggle.classList.remove('active');
-            navMenu.classList.remove('active');
-            body.classList.remove('menu-open');
-        }
-    });
-
-    // Goals slider functionality
-    function showGoal(goalNumber) {
-        // Hide all goals
-        document.querySelectorAll('.goal-item').forEach(goal => {
-            goal.style.display = 'none';
+        document.addEventListener('DOMContentLoaded', function () {
+            showGoal(1);
         });
-        
-        // Show selected goal
-        document.getElementById(`goal-${goalNumber}`).style.display = 'block';
-        
-        // Update active dot
-        document.querySelectorAll('.nav-dot').forEach(dot => {
-            dot.classList.remove('active');
-        });
-        document.querySelectorAll('.nav-dot')[goalNumber - 1].classList.add('active');
-    }
-
-    // Initialize first goal as visible
-    document.addEventListener('DOMContentLoaded', function() {
-        showGoal(1);
-    });
-</script>
+    </script>
 </body>
 
 </html>
